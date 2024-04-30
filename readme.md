@@ -18,7 +18,7 @@ from sqlite3adapter.database import Database
 db = Database('my-database.db')
 db.setup_passphrase('my-passphrase')
 ```
----
+
 Create a new table*
 ```python
 db.create_table('tbl_fruit', {
@@ -28,7 +28,7 @@ db.create_table('tbl_fruit', {
     'stock': 'INTEGER'
 }, passphrase='my-passphrase')
 ```
----
+
 Delete an existing table*
 ```python
 db.delete_table('table_fruit', passphrase='my-passphrase')
@@ -44,22 +44,22 @@ db.table('tbl_fruit').insert([
     (None, 'banana', 400, 150)
 ]).go()
 ```
----
+
 Run a GET statement
 ```python
 db.table('tbl_fruit').get().go()
 ```
----
+
 Run a GET-WHERE statement
 ```python
 db.table('tbl_fruit').get().where('price < 200').go()
 ```
----
+
 Run a SET statement
 ```python
 db.table('tbl_fruit').set('price', 100).go()
 ```
----
+
 Run a SET-WHERE statement
 ```python
 db.table('tbl_fruit').set('price', 100).where('name = "apple"').go()
