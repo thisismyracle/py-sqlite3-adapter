@@ -9,7 +9,6 @@ packages = [{include = "py_sqlite3_adapter"}]
 [tool.poetry.dependencies]
 python = "^3.10"
 pylint = "^3.1.0"
-python-dotenv = "^1.0.1"
 
 
 [build-system]
