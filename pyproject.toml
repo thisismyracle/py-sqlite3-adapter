@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "py-sqlite3-adapter"
+version = "0.1.0"
+description = "A basic adapter for python-sqlite3"
+authors = ["Myracle"]
+readme = "README.md"
+packages = [{include = "py_sqlite3_adapter"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pylint = "^3.1.0"
+python-dotenv = "^1.0.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
