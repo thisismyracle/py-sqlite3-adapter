@@ -76,4 +76,4 @@ class Set:
         :param cond: WHERE Condition
         :return: Where object
         """
-        return Where(self.sqlbuilder, self.sql(), cond, self.val)
+        return Where(self.sqlbuilder, self.sql(), cond, set_val=self.val)

@@ -108,6 +108,7 @@ class Database:
         is_success = (not is_exists) and self.is_table_exists(table_name)
 
         if is_success:
+            self.con.commit()
             print(f'Table `{table_name}` has been created.')
             print(contents)
         else:
@@ -140,6 +141,7 @@ class Database:
 
         is_success = is_exists and (not self.is_table_exists(table_name))
         if is_success:
+            self.con.commit()
             print(f'Table `{table_name}` has been deleted.')
         else:
             print('Table deletion failed. No table has been deleted.')

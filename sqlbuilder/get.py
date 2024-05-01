@@ -23,7 +23,7 @@ class Get:
         :param attr: Table attr you want to get
         """
         self.sqlbuilder = sqlbuilder
-        self.attr = '*' if attr is None else attr
+        self.attr = self.sqlbuilder.table_attr if attr is None else attr
         self.attr = [self.attr] if isinstance(attr, str) else self.attr
 
         self.validate()
@@ -59,7 +59,14 @@ class Get:
         if is_success:
             self.sqlbuilder.con.commit()
 
-        return self.sqlbuilder.cur.fetchall()
+        temp_res = self.sqlbuilder.cur.fetchall()
+        attr_len = len(self.attr)
+        res = []
+
+        for tr in temp_res:
+            res.append({self.attr[i]: tr[i] for i in range(attr_len)})
+
+        return res
 
     def where(self, cond: str) -> Where:
         """
@@ -68,4 +75,4 @@ class Get:
         :param cond: WHERE Condition
         :return: Where object
         """
-        return Where(self.sqlbuilder, self.sql(), cond)
+        return Where(self.sqlbuilder, self.sql(), cond, get_attr=self.attr)
