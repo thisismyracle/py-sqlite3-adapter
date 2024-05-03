@@ -52,7 +52,7 @@ db.table('tbl_fruit').get().go()
 
 Run a GET-WHERE statement
 ```python
-db.table('tbl_fruit').get().where('price < 200').go()
+db.table('tbl_fruit').get().where('price < ?', 200).go()
 ```
 
 Run a SET statement
@@ -62,7 +62,7 @@ db.table('tbl_fruit').set('price', 100).go()
 
 Run a SET-WHERE statement
 ```python
-db.table('tbl_fruit').set('price', 100).where('name = "apple"').go()
+db.table('tbl_fruit').set('price', 100).where('name = ?', 'apple').go()
 ```
 ---
 For the complete example please run [main.py](https://github.com/thisismyracle/py-sqlite3-adapter/blob/main/main.py).

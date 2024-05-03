@@ -1,5 +1,6 @@
 """ SQLBuilder: GET """
 
+from typing import Any
 from sqlbuilder.sqlbuilder import SQLBuilder
 from sqlbuilder.where import Where
 
@@ -12,7 +13,7 @@ class Get:
         validate() -> None
         sql() -> SQL(str)
         go() -> result of SQL GET(list)
-        where(cond) -> Where object(Where)
+        where(cond,values) -> Where object(Where)
     """
 
     def __init__(self, sqlbuilder: SQLBuilder, attr: str | list[str] | None):
@@ -68,11 +69,12 @@ class Get:
 
         return res
 
-    def where(self, cond: str) -> Where:
+    def where(self, cond: str, *values: Any) -> Where:
         """
         Continue to WHERE SQL statement
 
-        :param cond: WHERE Condition
+        :param cond: WHERE condition
+        :param values: WHERE values
         :return: Where object
         """
-        return Where(self.sqlbuilder, self.sql(), cond, get_attr=self.attr)
+        return Where(self.sqlbuilder, self.sql(), cond, None, self.attr, *values)

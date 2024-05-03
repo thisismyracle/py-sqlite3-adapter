@@ -50,11 +50,11 @@ if __name__ == '__main__':
 
     # GET-WHERE statement
     print('\nHow about we check the running out fruits?')
-    print(db.table('tbl_fruit').get().where('stock < 50').go())
+    print(db.table('tbl_fruit').get().where('stock < ?', 50).go())
 
     # SET-WHERE statement
     print('\nStocks are cominggg! renewing stock count!')
-    print(db.table('tbl_fruit').set('stock', 105).where('name = "apple"').go())
+    print(db.table('tbl_fruit').set('stock', 105).where('name = ?', 'apple').go())
     print(db.table('tbl_fruit').get().go())
 
     # SET statement

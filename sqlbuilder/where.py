@@ -15,7 +15,7 @@ class Where:
 
     def __init__(self, sqlbuilder: SQLBuilder, prev_sql: str, cond: str,
                  set_val: list[Any] | None = None,
-                 get_attr: list[str] | None = None):
+                 get_attr: list[str] | None = None, *values: Any):
         """
         Where SQL Builder initialization
 
@@ -23,12 +23,15 @@ class Where:
         :param prev_sql: previous SQL
         :param cond: WHERE SQL condition
         :param set_val: new values if needed (e.g. for SET SQL)
+        :param get_attr: attr you want to GET
+        :param values: WHERE values
         """
         self.sqlbuilder = sqlbuilder
         self.prev_sql = prev_sql
         self.cond = cond
         self.set_val = set_val
         self.get_attr = get_attr
+        self.values = values
 
     def sql(self) -> str:
         """
@@ -47,10 +50,11 @@ class Where:
         """
         if self.set_val is None:
             # GET-WHERE
-            self.sqlbuilder.cur.execute(self.sql())
+            self.sqlbuilder.cur.execute(self.sql(), self.values)
         else:
             # SET-WHERE
-            self.sqlbuilder.cur.execute(self.sql(), self.set_val)
+            set_where_val = self.set_val + list(self.values)
+            self.sqlbuilder.cur.execute(self.sql(), set_where_val)
 
         is_success = self.sqlbuilder.cur.rowcount > 0
         if is_success:
